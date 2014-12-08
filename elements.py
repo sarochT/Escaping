@@ -99,7 +99,8 @@ class Monster(object):
         self.vy = vy
         self.crop = Rect((self.x, self.HEIGHT - self.y, self.RADIUS*2, self.RADIUS*2))
 
-    def auto_move(self):
+    def auto_move(self, timeMS):
+        self.VX += timeMS/1000000.0000000
         if self.waytowalk == 1:
             self.x -= self.VX
             self.y -= self.VY

@@ -63,11 +63,11 @@ class Escaping(gamelib.SimpleGame):
 
     def update_monster(self):
         for y in self.monsters1 :
-            y.auto_move()
+            y.auto_move(self.count_time)
         for y in self.monsters2 :
-            y.auto_move()
+            y.auto_move(self.count_time)
         for y in self.monsters3 :
-            y.auto_move()
+            y.auto_move(self.count_time)
 
     def auto_move_Square(self):
         for x in self.squares :
@@ -117,11 +117,6 @@ class Escaping(gamelib.SimpleGame):
         surface.blit(self.time_image,(10,50))
         self.render_Monster(surface)
         self.render_Square(surface)
-
-    def render_coin(self):
-        for y in self.coins :
-            y.render(surface)
-
 
     def render_score(self):
         self.score_image = self.font.render("Score = %d" % self.score, 0, Escaping.WHITE)
