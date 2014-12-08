@@ -63,11 +63,11 @@ class Escaping(gamelib.SimpleGame):
 
     def update_monster(self):
         for y in self.monsters1 :
-            y.auto_move(self.count_time)
+            y.auto_move(self.count_time, self.time)
         for y in self.monsters2 :
-            y.auto_move(self.count_time)
+            y.auto_move(self.count_time, self.time)
         for y in self.monsters3 :
-            y.auto_move(self.count_time)
+            y.auto_move(self.count_time, self.time)
 
     def auto_move_Square(self):
         for x in self.squares :

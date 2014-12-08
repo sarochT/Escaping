@@ -90,6 +90,7 @@ class Monster(object):
     YELLOW = pygame.Color('yellow')
     RED = pygame.Color('red')
     BLUE = pygame.Color('blue')
+    Time = 0
 
     def __init__(self, radius, pos, color, vy , waytowalk):
         (self.x, self.y) = pos
@@ -99,8 +100,11 @@ class Monster(object):
         self.vy = vy
         self.crop = Rect((self.x, self.HEIGHT - self.y, self.RADIUS*2, self.RADIUS*2))
 
-    def auto_move(self, timeMS):
+    def auto_move(self, timeMS, time):
         self.VX += timeMS/1000000.0000000
+        if time - self.Time > random.randint(5,12):
+            self.waytowalk = random.randint(0,1)
+            self.Time = time
         if self.waytowalk == 1:
             self.x -= self.VX
             self.y -= self.VY
