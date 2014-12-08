@@ -51,6 +51,7 @@ class Escaping(gamelib.SimpleGame):
                 pos=(random.randint(0,self.WIDTH), self.HEIGHT/self.AmountOfSquare*3+15), vy=10, waytowalk=random.randint(0,1)))
 
     def update(self):
+        self.restartGame()
         if self.IsGameStarted :
             self.auto_move_Square()
             self.player.auto_move()
@@ -60,6 +61,7 @@ class Escaping(gamelib.SimpleGame):
             self.update_time()
             self.update_monster()
             self.CheckCollision_Between_Monster_Player()
+            self.checkIsEndGame()
 
     def update_monster(self):
         for y in self.monsters1 :
@@ -69,9 +71,28 @@ class Escaping(gamelib.SimpleGame):
         for y in self.monsters3 :
             y.auto_move(self.count_time, self.time)
 
+    def restartGame(self):
+        if self.is_key_pressed(K_DOWN):
+            super(Escaping, self).__init__('Escaping', Escaping.BLACK)
+            self.player = Player(radius=self.radius, color=Escaping.WHITE, pos=(self.window_size[0]/2, self.window_size[1]/2), vy = 120, check_jump = 0)
+            self.squares = []
+            self.monsters1 = []
+            self.monsters2 = []
+            self.monsters3 = []
+            self.score = 0
+            self.count_time = 0
+            self.time = 0
+            self.init_monster()
+            self.IsGameStarted = True
+            self.init_Square()  
+
     def auto_move_Square(self):
         for x in self.squares :
             x.auto_move()
+
+    def checkIsEndGame(self):
+        if self.player.y < -15:
+            self.IsGameStarted = False
 
     def CheckCollision_Between_Monster_Player(self):
         if self.time >= 4:
